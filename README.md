@@ -1,54 +1,117 @@
-在react 上配置使用vw 适配方案
+在 react 上配置使用 vw 适配方案
 
-该demo 为vw 适配方案 react 16 && react-router-dom 4+ 搭配使用，一个多页面路由项目.
+该 demo 为 vw 适配方案 react 16 && react-router-dom 4+ 搭配使用，一个多页面路由项目.
+## router-component 分支上 用另外一种方法 加载组件
+app.js
+```
+import React, {Component} from 'react';
+import {Route, Switch, NavLink, Redirect, withRouter} from 'react-router-dom';
+import Loadable from 'react-loadable';
+import {
+	Carousel,
+	Button
+} from 'antd';
+
+import './css/App.css';
+import router from './router/router';
+import Home from './pages/home/home';
+
+/**  */
+const HomeComponent = Loadable({
+	loader: () => import('./pages/home/home'),
+	loading: Home,
+});
+
+const IndexComponent = () => {
+	return (<div>
+	  <Carousel autoplay>
+			<div className='img-list'><img src={require('./images/index/one.png')} alt=''/></div>
+			<div className='img-list'><img src={require('./images/index/groups.jpeg')} alt=''/></div>
+			<div className='img-list'><img src={require('./images/index/group.png')} alt=''/></div>
+		</Carousel>
+		<div className='bottom-btn'>
+		  <Button type='primary'>
+			  <NavLink to='/home'>进入瞅瞅</NavLink>
+			</Button>
+		</div>
+	</div>);
+}
+
+class App extends Component {
+	render() {
+		return (
+			<div className='index-wrap'>
+				<Switch>
+					<Route path='/' exact component={IndexComponent}></Route>
+					<Route path='/home' component={HomeComponent}></Route>
+					<Redirect to={{
+						pathname: '/',
+						search: '?utm=your+face'
+					}}/>
+				</Switch>
+			</div>
+		);
+	}
+}
+
+export default withRouter(App);
 
 ```
-import Home from '../../components/Home';
-import ProductDetail from '../../components/ProductDetail';
-import User from '../../components/User';
-import Main from '../../components/User/Main';
-import Info from '../../components/User/Info';
+
+
+## 路由配置
+```
+import Demo from '../pages/demo/demo';
+
+// pages 页面
+import Home from '../pages/home/home';
+import FeCrRandom from '../pages/fe-cr-random/fe-cr-random';
 
 let router = [
-    {
-        path: '/',//首页默认加载的页面
-        component: Home,
-        exact: true //是否为严格模式
-    },
-    {
-        path: '/productdetail/:id',//后面是传递的参数id
-        component: ProductDetail
-    },
-    {
-        path: '/user',
-        component: User,
-        routes: [  /** 嵌套路由  User下面又有两个子页面*/
-            {
-                path: '/user/',
-                component: Main,
-                exact: true
-            },
-            {
-                path: '/user/info',
-                component: Info
-            },
-        ]
-    }
+	{
+		path: '/demo',
+		component: Demo
+	},
+	{
+		path: '/home',
+		component: Home,
+		exact: true //是否为严格模式
+	},
+	{
+		path: '/fe-cr-random',
+		component: FeCrRandom
+	},
+	{ // 拓展二级路由
+		path: '/user',
+		component: Home,
+		routes: [
+			/** 嵌套路由  User下面又有两个子页面*/
+			{
+				path: '/user/',
+				component: Home,
+				exact: true
+			},
+			{
+				path: '/user/info',
+				component: Home
+			},
+		]
+	}
 ];
 
 export default router;
-``` 
-
+```
 
 项目中有遇到的坑：
- ```html 
+
+```html
 1、cssnano 如果你的版本为：4+ 以上，请在配置中如下方案配置：
 
 cssnano({
-    "cssnano-preset-advanced": {
-        zindex: false,
-        autoprefixer: false
-    },
+   "cssnano-preset-advanced": {
+       zindex: false,
+       autoprefixer: false
+   },
 })
 
 我遇到了始终把你定位的z-index值重新计算为：1，巨坑，不然你会一口老血喷出来的。
@@ -101,9 +164,9 @@ img {
 	transform: scaleY(0.5);
 	z-index: 2;
 }
- ```
+```
 
-如果你不使用react 也不使用vue ，在项目中只使用html页面 vw实现移动端适配，请点这 <a href="https://github.com/caoxiaoke/html-vw-layout">《如何在html项目中使用vw实现移动端适配》</a>
+如果你不使用 react 也不使用 vue ，在项目中只使用 html 页面 vw 实现移动端适配，请点这 <a href="https://github.com/caoxiaoke/html-vw-layout">《如何在 html 项目中使用 vw 实现移动端适配》</a>
 
 <br/>
 <br/>

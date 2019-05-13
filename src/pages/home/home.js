@@ -8,7 +8,7 @@ import {
 } from 'antd';
 import { navList } from '../../config/nav.config';
 
-require('./home.css');
+import './home.css';
 
 class Home extends Component {
 	constructor(props) {

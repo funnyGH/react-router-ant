@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Route, Switch, NavLink, Redirect, withRouter} from 'react-router-dom';
 import Loadable from 'react-loadable';
-
-import './App.css';
 import {
 	Carousel,
 	Button
 } from 'antd';
 
+import './css/App.css';
+import router from './router/router';
 import Home from './pages/home/home';
 
 /**  */
