@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
-import {Route, Switch, NavLink, Redirect, withRouter} from 'react-router-dom';
-import Loadable from 'react-loadable';
+import {
+	Route,
+	Switch,
+	NavLink,
+	Redirect
+} from 'react-router-dom';
 import {
 	Carousel,
 	Button
@@ -8,13 +12,6 @@ import {
 
 import './css/App.css';
 import router from './router/router';
-import Home from './pages/home/home';
-
-/**  */
-const HomeComponent = Loadable({
-	loader: () => import('./pages/home/home'),
-	loading: Home,
-});
 
 const IndexComponent = () => {
 	return (<div>
@@ -37,10 +34,36 @@ class App extends Component {
 			<div className='index-wrap'>
 				<Switch>
 					<Route path='/' exact component={IndexComponent}></Route>
-					<Route path='/home' component={HomeComponent}></Route>
+
+          {
+            router.map((route, key) => {
+              if (route.exact) {//如果有严格模式
+                return <Route exact 
+									key={ key } 
+									path={ route.path } 
+									render={ props => (
+										//主要是为了传递嵌套路由到子组件 
+										//类似于 <User {...props} routes={route.routes} />
+										<route.component {...props} routes={route.children || []} />
+									)}
+								/>
+              } else {
+                return <Route  
+									key={ key }
+									path={ route.path } 
+									render={ props => (
+										//主要是为了传递嵌套路由到子组件 
+										//类似于 <User {...props} routes={route.routes} />
+										<route.component {...props} routes={route.children || []} />
+									)}
+								/>
+              }
+            })
+          }
+
 					<Redirect to={{
 						pathname: '/',
-						search: '?utm=your+face'
+						search: '?unlegal-url'
 					}}/>
 				</Switch>
 			</div>
@@ -48,4 +71,5 @@ class App extends Component {
 	}
 }
 
-export default withRouter(App);
+// export default withRouter(App);
+export default App;

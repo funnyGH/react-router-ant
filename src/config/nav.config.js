@@ -9,7 +9,7 @@ export const navList = [
   {
     "labelName": "随机选人系统",
     "icon": "http://officalcms.upy.jiedaibao.com/2019/0507/20190507053148764.png",
-    "toUrl": "/cr-choose-random",
+    "toUrl": "/fe-cr-random",
     "description": "用来随机抽取 CR 参与人员",
     "children": []
   }

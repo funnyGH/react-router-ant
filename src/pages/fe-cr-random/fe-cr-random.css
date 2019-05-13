@@ -1,0 +1,45 @@
+.lottery_all {
+  list-style: none;
+  padding: 50px;
+}
+
+.lottery_all>li {
+  display: inline-block;
+  margin-right: 30px;
+  overflow: hidden;
+  border: 1px solid #f1f1f1;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.lottery_box {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+}
+
+ .lottery_box img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right:0;
+  bottom: 0;
+  background-color: #fff;
+  opacity: 0.5;
+}
+
+li .lottery_yeah .dialog {
+  opacity: 0;
+}
+
+.choose-result-wrap {
+  padding: 0 20px;
+}

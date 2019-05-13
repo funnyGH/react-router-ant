@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 import {
 	PageHeader,
@@ -11,9 +11,11 @@ import { navList } from '../../config/nav.config';
 import './home.css';
 
 class Home extends Component {
+	superData = null; 
+
 	constructor(props) {
 		super(props)
-		console.log(navList)
+		this.superData = null;
 	}
 
 	// 组件装载之后调用
@@ -30,6 +32,7 @@ class Home extends Component {
 					title='FE业务组'
 					subTitle='插件集'>
 				</PageHeader>
+
 			  <div className='home-box'>
 					<List
 						itemLayout='horizontal'
@@ -38,7 +41,7 @@ class Home extends Component {
 							<List.Item>
 								<List.Item.Meta
 									avatar={<Avatar src={item.icon} />}
-									title={<a href='https://ant.design'>{item.labelName}</a>}
+                  title={<Link to={`${item.toUrl}`}>{item.labelName}</Link>}
 									description={item.description}
 								/>
 							</List.Item>

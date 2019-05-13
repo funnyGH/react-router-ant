@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 class Demo extends Component {
 	constructor(props) {
@@ -16,15 +16,12 @@ class Demo extends Component {
 		return (
 			<div>
 				<div className="list">
-					<div className="list-row box box-pack-center">
-						<NavLink to="/page-b">Link-To-PageB</NavLink>
-					</div>
-					<div className="list-row box box-pack-center">
-						<NavLink to="/page-c">Link-To-PageC</NavLink>
+					<div className="list-row">
+						<NavLink to="/home">Link-To-Home</NavLink>
 					</div>
 				</div>
 				<div className="test">
-					React Page A
+					React Page Demo
 				</div>
 			</div>);
 	}

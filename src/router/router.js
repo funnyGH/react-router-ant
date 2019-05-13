@@ -12,7 +12,7 @@ let router = [
 	{
 		path: '/home',
 		component: Home,
-		exact: true //是否为严格模式
+		exact: false //是否为严格模式
 	},
 	{
 		path: '/fe-cr-random',
@@ -21,7 +21,7 @@ let router = [
 	{ // 拓展二级路由
 		path: '/user',
 		component: Home,
-		routes: [
+		children: [
 			/** 嵌套路由  User下面又有两个子页面*/
 			{
 				path: '/user/',
